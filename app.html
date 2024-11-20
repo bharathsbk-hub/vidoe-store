@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for a video...">
+        <button onclick="searchVideo()">Search</button>
+        <button id="backButton" onclick="goBack()" class="hidden">Back</button>
+    </div>
+
+    <div id="resultContainer" class="results"></div>
+
+    <div class="video-row" id="videoRow">
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/godzilla vs kong.mp4" type="video/mp4"> 
+            </video>
+            <p class="video-txt">Kong vs Godzilla</p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/rdr2.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Red Dead Redemption </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/venom.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Venom last dance </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/instellar.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Interstellar cornfield chase </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/inception.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Inception theme song </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/oppenheimer.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Oppenheimer beauty in 4 mins  </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/deadpool.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Deadpool & wolverine </p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/mip.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">Mission impossible 8</p>
+        </div>
+
+        <div class="one">
+            <video class="myvideo" width="426px" height="240px" controls muted>
+                <source src="https://d3p9jc8wv1aukb.cloudfront.net/what if.mp4" type="video/mp4">
+            </video>
+            <p class="video-txt">What if </p>
+        </div>
+    </div>
+
+    <script>
+        const videoElements = document.querySelectorAll(".myvideo");
+        const videoRow = document.getElementById("videoRow");
+        const backButton = document.getElementById("backButton");
+        const resultContainer = document.getElementById("resultContainer");
+
+
+        videoElements.forEach(function(video) {
+    video.addEventListener("mouseover", function() {
+        video.play();
+    });
+    video.addEventListener("mouseout", function() {
+        video.pause();
+    });
+});
+
+        // Mute all videos initially
+        const muteAllVideos = () => {
+            document.querySelectorAll("video").forEach(video => {
+                video.muted = true;
+            });
+        };
+
+        // Function to unmute a specific video when it goes fullscreen
+        const unmuteVideoOnFullscreen = (video) => {
+            video.muted = false;
+        };
+
+        // Listen for fullscreen changes to mute/unmute videos accordingly
+        videoElements.forEach(video => {
+            video.addEventListener('click', function () {
+                // Request fullscreen for the clicked video
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) { // Firefox
+                    video.mozRequestFullScreen();
+                } else if (video.webkitRequestFullscreen) { // Chrome, Safari
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { // IE/Edge
+                    video.msRequestFullscreen();
+                }
+            });
+        });
+
+        document.addEventListener("fullscreenchange", function () {
+            const fullscreenVideo = document.fullscreenElement;
+
+            if (fullscreenVideo) {
+                // Unmute the fullscreen video
+                unmuteVideoOnFullscreen(fullscreenVideo);
+            } else {
+                // Mute all videos when exiting fullscreen
+                muteAllVideos();
+            }
+        });
+
+        // Video data for search functionality
+        const videos = [
+            { title: "Kong vs Godzilla", url: "https://d3p9jc8wv1aukb.cloudfront.net/godzilla%20vs%20kong.mp4" },
+            { title: "Red Dead Redemption", url: "https://d3p9jc8wv1aukb.cloudfront.net/rdr2.mp4" },
+            { title: "Venom Last Dance", url: "https://d3p9jc8wv1aukb.cloudfront.net/venom.mp4" },
+            { title: "Interstellar Cornfield Chase", url: "https://d3p9jc8wv1aukb.cloudfront.net/instellar.mp4" },
+            { title: "Inception Theme Song", url: "https://d3p9jc8wv1aukb.cloudfront.net/inception.mp4" },
+            { title: "Oppenheimer Beauty in 4 mins", url: "https://d3p9jc8wv1aukb.cloudfront.net/oppenheimer.mp4" },
+            { title: "Deadpool & Wolverine", url: "https://d3p9jc8wv1aukb.cloudfront.net/deadpool.mp4" },
+            { title: "Mission Impossible 8", url: "https://d3p9jc8wv1aukb.cloudfront.net/mip.mp4" },
+            { title: "What If Season 3", url: "https://d3p9jc8wv1aukb.cloudfront.net/what%20if.mp4" }
+        ];
+
+        // Search function to filter videos by title
+        function searchVideo() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const resultContainer = document.getElementById("resultContainer");
+
+            // Hide the main video row when searching
+            videoRow.classList.add("hidden");
+
+            // Clear previous search results
+            resultContainer.innerHTML = "";
+
+            // Filter videos by search term
+            const filteredVideos = videos.filter(video =>
+                video.title.toLowerCase().includes(searchInput)
+            );
+
+            // Display search results in full view if found
+            if (filteredVideos.length > 0) {
+                filteredVideos.forEach(video => {
+                    const videoCard = document.createElement("div");
+                    videoCard.className = "full-video";
+                    videoCard.innerHTML = `
+                        <h3>${video.title}</h3>
+                        <video class="myvideo" src="${video.url}" controls autoplay muted width="100%"></video>
+                    `;
+                    resultContainer.appendChild(videoCard);
+                });
+            } else {
+                resultContainer.innerHTML = "<p>No videos found.</p>";
+            }
+
+            // Mute all videos in search result view
+            backButton.classList.remove("hidden");
+        }
+
+        function goBack() {
+            // Clear search results
+            resultContainer.innerHTML = "";
+
+            // Show the main video row
+            videoRow.classList.remove("hidden");
+
+            // Hide the Back button
+            backButton.classList.add("hidden");
+
+            // Mute all videos
+            muteAllVideos();
+        }
+
+        // Handle input changes to toggle back/reset automatically
+        document.getElementById("searchInput").addEventListener("input", function () {
+            if (this.value === "") {
+                // If the input is cleared, show the main view
+                goBack();
+            } else {
+                // If there's input, ensure the back button is visible
+                backButton.classList.remove("hidden");
+            }
+        });
+
+
+        // Initial mute on page load
+        window.onload = muteAllVideos;
+
+    </script>
+</body>
+</html>

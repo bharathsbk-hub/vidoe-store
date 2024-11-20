@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Container for video list */
+.video-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Space between the videos */
+    justify-items: center;
+    align-items: flex-start;
+}
+
+/* Hide elements */
+.hidden {
+    display: none;
+}
+
+/* Style for full video view when searched */
+.full-video {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.one {
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+
+
+.video-txt {
+    margin-top: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Centering and styling search container */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Search input styling */
+#searchInput {
+    padding: 10px;
+    width: 60%;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+/* Button styling */
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for consistency */
+    margin-left: 10px; /* Spacing between input and button */
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Container for search results */
+.results {
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Styling individual video cards in search results */
+.video-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better card visibility */
+    transition: box-shadow 0.3s ease;
+}
+
+/* Video card hover effect */
+.video-card:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Slightly more shadow on hover */
+}
